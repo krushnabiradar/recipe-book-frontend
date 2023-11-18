@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Login from "./components/Login";
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import Register from "./components/Register";
+import Navbar from "./components/Navbar";
+import PrivateComponent from "./components/PrivateComponent";
+import Recipes from "./components/Recipes";
+import AddRecipe from "./components/AddRecipe";
+import LikedProducts from "./components/likedProducts";
+import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
+
+        <Route element={<PrivateComponent />}>
+          <Route path="/favouriteRecipes" element={<LikedProducts />} />
+          <Route path="/recipes" element={<Recipes />} />
+          <Route path="/" element={<Recipes />} />
+          <Route path="/addRecipe" element={<AddRecipe />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
