@@ -69,7 +69,7 @@ const AddRecipe = () => {
 
         setTimeout(() => {
           window.location.href = "/recipes";
-        }, 4000);
+        }, 2000);
       } else {
         toast.error("Failed to add recipe:", response.status);
       }

@@ -49,7 +49,7 @@ const LikedProducts = () => {
           fetchLikedProducts();
           setTimeout(() => {
             window.location.href = "/favouriteRecipes";
-          }, 4000);
+          }, 1000);
         } else {
           const data = await response.json();
           toast.error(data.error);

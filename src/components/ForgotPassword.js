@@ -36,7 +36,7 @@ const UpdatePassword = () => {
 
         setTimeout(() => {
           window.location.href = "/login";
-        }, 4000);
+        }, 2000);
       } else {
         setMessage("An error occurred while updating the password.");
         toast.error("Error in Password update");

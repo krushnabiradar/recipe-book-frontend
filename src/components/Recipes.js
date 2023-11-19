@@ -12,60 +12,58 @@ const Recipes = () => {
     getRecipes();
   }, []);
 
-  const getRecipes = () => {
-    fetch("http://localhost:8080/auth/recipe", {
-      method: "GET",
-      headers: {
-        Authorization: `${localStorage.getItem("token")}`,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch recipe data");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setRecipes(data);
-      })
-      .catch((error) => {
-        console.error(error);
+  const getRecipes = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/auth/recipe", {
+        method: "GET",
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch recipe data");
+      }
+
+      const data = await response.json();
+      setRecipes(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-const handleDeleteRecipe = async (recipeId) => {
-  try {
-    // Confirm the deletion with the user
-    if (window.confirm("Are you sure you want to delete this recipe?")) {
-      // Send a DELETE request to the server
-      const response = await fetch(
-        `http://localhost:8080/auth/recipe/${recipeId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `${localStorage.getItem("token")}`,
-          },
+  const handleDeleteRecipe = async (recipeId) => {
+    try {
+      // Confirm the deletion with the user
+      if (window.confirm("Are you sure you want to delete this recipe?")) {
+        // Send a DELETE request to the server
+        const response = await fetch(
+          `http://localhost:8080/auth/recipe/${recipeId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `${localStorage.getItem("token")}`,
+            },
+          }
+        );
+
+        if (response.ok) {
+          toast.success("Recipe deleted successfully");
+          setTimeout(() => {
+            window.location = "/recipes";
+          }, 1000);
+        } else {
+          console.error("Failed to delete recipe:", response.status);
         }
-      );
-
-      if (response.ok) {
-        toast.success("Recipe deleted successfully");
-        setTimeout(() => {
-          window.location = "/recipes";
-        }, 4000);
-      } else {
-        console.error("Failed to delete recipe:", response.status);
       }
+    } catch (error) {
+      toast.error("An error occurred while deleting the recipe:", error);
+
+      setTimeout(() => {
+        window.location.href = "/recipes";
+      }, 1000);
     }
-  } catch (error) {
-    toast.error("An error occurred while deleting the recipe:", error);
-
-    setTimeout(() => {
-      window.location.href = "/recipes";
-    }, 3000);
-  }
-};
-
+  };
 
   const handleAddToFavorites = async (recipeId) => {
     try {
@@ -82,7 +80,7 @@ const handleDeleteRecipe = async (recipeId) => {
 
         setTimeout(() => {
           window.location.href = "/favouriteRecipes";
-        }, 4000);
+        }, 1000);
       } else {
         const data = await response.json();
         if (data.error === "Recipe already exists in your favorites") {

@@ -36,7 +36,7 @@ const Register = () => {
           localStorage.setItem("token", user.token);
           setTimeout(() => {
             window.location.href = "/";
-          }, 4000);
+          }, 1000);
         }
       } else {
         console.error("Failed to register user:", response.status);

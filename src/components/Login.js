@@ -34,7 +34,7 @@ const Login = () => {
 
         setTimeout(() => {
           window.location.href = "/";
-        }, 4000);
+        }, 1000);
       } else {
         toast.error(response.error);
       }
