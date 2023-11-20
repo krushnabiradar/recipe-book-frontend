@@ -14,7 +14,7 @@ const Recipes = () => {
 
   const getRecipes = async () => {
     try {
-      const response = await fetch("http://localhost:8080/auth/recipe", {
+      const response = await fetch("https://recipe-book-backend-cwuk.onrender.com/auth/recipe", {
         method: "GET",
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
@@ -38,7 +38,7 @@ const Recipes = () => {
       if (window.confirm("Are you sure you want to delete this recipe?")) {
         // Send a DELETE request to the server
         const response = await fetch(
-          `http://localhost:8080/auth/recipe/${recipeId}`,
+          `https://recipe-book-backend-cwuk.onrender.com/auth/recipe/${recipeId}`,
           {
             method: "DELETE",
             headers: {
@@ -69,7 +69,7 @@ const Recipes = () => {
     try {
       // Send a POST request to the LikedList controller
       const response = await fetch(
-        `http://localhost:8080/auth/likedRecipes/${recipeId}`,
+        `https://recipe-book-backend-cwuk.onrender.com/auth/likedRecipes/${recipeId}`,
         {
           method: "POST",
         }
@@ -98,7 +98,7 @@ const Recipes = () => {
     try {
       if (e.target.value) {
         let Searchedrecipes = await fetch(
-          `http://localhost:8080/auth/searchRecipes/${e.target.value}`,
+          `https://recipe-book-backend-cwuk.onrender.com/auth/searchRecipes/${e.target.value}`,
           {
             method: "GET",
             headers: {

@@ -53,7 +53,7 @@ const AddRecipe = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/auth/recipe",
+        "https://recipe-book-backend-cwuk.onrender.com/auth/recipe",
         {
           method: "POST",
           headers: {

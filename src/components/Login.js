@@ -20,11 +20,14 @@ const Login = () => {
     }
 
     try {
-      let response = await fetch("http://localhost:8080/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: Email, password }),
-      });
+      let response = await fetch(
+        "https://recipe-book-backend-cwuk.onrender.com/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: Email, password }),
+        }
+      );
 
       response = await response.json();
 
@@ -61,16 +64,17 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-          >
+          <button type="button" onClick={() => setShowPassword(!showPassword)}>
             {showPassword ? "Hide" : "Show"}
           </button>
         </div>
         <button type="submit">Submit</button>
 
         <Link to="/forgotPassword">Forgot Password</Link>
+        <p>
+          Don't have account?
+          <Link to="/SignUp"> Sign-Up</Link>
+        </p>
       </form>
       {showError && (
         <span className="fill-fields-error">Please Fill all the fields</span>

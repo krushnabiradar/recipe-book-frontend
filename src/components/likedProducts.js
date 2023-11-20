@@ -14,7 +14,7 @@ const LikedProducts = () => {
     try {
       // Make a GET request to the /api/liked-products endpoint
       const response = await fetch(
-        "http://localhost:8080/auth/likedRecipes"
+        "https://recipe-book-backend-cwuk.onrender.com/auth/likedRecipes"
       );
 
       if (!response.ok) {
@@ -38,7 +38,7 @@ const LikedProducts = () => {
         )
       ) {
         const response = await fetch(
-          `http://localhost:8080/auth/removeLiked/${recipeId}`,
+          `https://recipe-book-backend-cwuk.onrender.com/auth/removeLiked/${recipeId}`,
           {
             method: "DELETE",
           }
